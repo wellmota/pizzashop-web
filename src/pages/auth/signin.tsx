@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 import { z } from "zod";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -13,7 +14,7 @@ const signInForm = z.object({
 
 type SignInForm = z.infer<typeof signInForm>;
 
-export function Signin() {
+export function SignIn() {
   const {
     register,
     handleSubmit,
@@ -41,6 +42,10 @@ export function Signin() {
     <>
       <Helmet title="Sign in" />
       <div className="p-8">
+        <Button variant={"ghost"} asChild className="absolute right-8 top-8">
+          <Link to="/signup">Create New Account</Link>
+        </Button>
+
         <div className="flex w-[350px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
