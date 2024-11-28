@@ -28,8 +28,6 @@ export function SignUp() {
 
   async function handleSignUp(data: SignUpForm) {
     try {
-      console.log(data);
-
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       toast.success("New company register successfully", {
@@ -61,7 +59,7 @@ export function SignUp() {
           </div>
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="companyNamel">Company Name</Label>
+              <Label htmlFor="companyName">Company Name</Label>
               <Input
                 id="companyName"
                 type="text"
