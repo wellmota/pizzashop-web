@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog } from '@/components/ui/dialog';
 import { TableRow, TableCell } from '@/components/ui/table';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { Search, ArrowRight, X } from 'lucide-react';
