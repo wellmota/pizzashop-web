@@ -1,12 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Helmet } from "react-helmet-async";
-import { z } from "zod";
-import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Helmet } from 'react-helmet-async';
+import { z } from 'zod';
+import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
 
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { signIn } from '@/api/sign-in';
 
 const signInForm = z.object({
   email: z.string().email(),
@@ -21,20 +23,24 @@ export function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInForm>();
 
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  });
+
   async function handleSignIn(data: SignInForm) {
     try {
       console.log(data);
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await authenticate({ email: data.email });
 
-      toast.success("An email has been sent to you with the access link", {
+      toast.success('An email has been sent to you with the access link', {
         action: {
-          label: "Reenviar",
+          label: 'Reenviar',
           onClick: () => handleSignIn(data),
         },
       });
     } catch (error) {
-      toast.error("An error occured, please try again later");
+      toast.error('An error occured, please try again later');
     }
   }
 
@@ -42,7 +48,7 @@ export function SignIn() {
     <>
       <Helmet title="Sign in" />
       <div className="p-8">
-        <Button variant={"ghost"} asChild className="absolute right-8 top-8">
+        <Button variant={'ghost'} asChild className="absolute right-8 top-8">
           <Link to="/signup">Create New Account</Link>
         </Button>
 
@@ -58,7 +64,7 @@ export function SignIn() {
           <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Your email</Label>
-              <Input id="email" type="email" {...register("email")} />
+              <Input id="email" type="email" {...register('email')} />
             </div>
             <Button disabled={isSubmitting} className="w-full" type="submit">
               Access panel
