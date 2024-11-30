@@ -11,9 +11,9 @@ import { useMutation } from '@tanstack/react-query';
 import { registerRestaurant } from '@/api/register-restaurant';
 
 const signUpForm = z.object({
-  email: z.string().email(),
-  companyName: z.string(),
+  restaurantName: z.string(),
   managerName: z.string(),
+  email: z.string().email(),
   phone: z.string(),
 });
 
@@ -35,7 +35,7 @@ export function SignUp() {
   async function handleSignUp(data: SignUpForm) {
     try {
       await registerRestaurantFn({
-        companyName: data.companyName,
+        restaurantName: data.restaurantName,
         managerName: data.managerName,
         email: data.email,
         phone: data.phone,
@@ -70,11 +70,11 @@ export function SignUp() {
           </div>
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name</Label>
+              <Label htmlFor="restaurantName">Restaurant Name</Label>
               <Input
-                id="companyName"
+                id="restaurantName"
                 type="text"
-                {...register('companyName')}
+                {...register('restaurantName')}
               />
             </div>
             <div className="space-y-2">
