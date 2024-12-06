@@ -1,4 +1,4 @@
-import { Building, ChevronDown, Divide, LogOut } from 'lucide-react';
+import { Building, ChevronDown, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -19,12 +19,14 @@ export function AccountMenu() {
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
     queryKey: ['profile'],
     queryFn: getProfile,
+    staleTime: Infinity,
   });
 
   const { data: managedRestaurant, isLoading: isLoadingManagedRestaurant } =
     useQuery({
       queryKey: ['managed-restaurant'],
       queryFn: getManagedRestaurant,
+      staleTime: Infinity,
     });
 
   return (
