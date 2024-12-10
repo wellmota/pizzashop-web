@@ -9,6 +9,8 @@ export function DayOrdersAmountCard() {
     queryKey: ['metrics', 'day-orders-amount'],
   });
 
+  console.log(dayOrdersAmount?.amount);
+
   return (
     <Card>
       <CardHeader className="flex-row space-y-0 item-center justify-between pb-2">
