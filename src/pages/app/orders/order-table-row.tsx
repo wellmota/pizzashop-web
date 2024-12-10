@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog } from '@/components/ui/dialog';
 import { TableRow, TableCell } from '@/components/ui/table';
 import { DialogTrigger } from '@radix-ui/react-dialog';
-import { Search, ArrowRight, X, Variable } from 'lucide-react';
+import { Search, ArrowRight, X } from 'lucide-react';
 import { OrderDetails } from './order-details';
 import { OrderStatus } from '@/components/order-status';
 
