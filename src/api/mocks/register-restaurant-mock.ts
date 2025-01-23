@@ -1,4 +1,4 @@
-import { RegisterRestaurantBody } from './../register-restaurant';
+import { RegisterRestaurantBody } from '../register-restaurant';
 import { http, HttpResponse } from 'msw';
 
 export const registerRestaurantMock = http.post<never, RegisterRestaurantBody>(

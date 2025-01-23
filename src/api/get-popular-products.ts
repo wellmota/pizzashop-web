@@ -5,7 +5,7 @@ export type GetPopularProductsResponse = {
   amount: number;
 }[];
 
-export async function getPopularProducts() {
+export async function getPopularProductsMock() {
   const response = await api.get<GetPopularProductsResponse>(
     '/metrics/popular-products',
   );
