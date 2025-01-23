@@ -13,8 +13,11 @@ import { getManagedRestaurantMock } from './get-managed-restaurant-mock';
 import { updateProfileMock } from './update-profile-mock';
 import { getProfileMock } from './get-profile-mock';
 import { getOrdersMock } from './get-order-mock';
-import { getOrderDetailsMock } from './get-orders-details-mock'
-
+import { getOrderDetailsMock } from './get-orders-details-mock';
+import { approveOrderMock } from './approve-order-mock';
+import { cancelOrderMock } from './cancel-order-mock';
+import { deliverOrderMock } from './deliver-order-mock';
+import { dispatchOrderMock } from './dispatch-order-mock';
 
 export const worker = setupWorker(
   signInMock,
@@ -29,7 +32,11 @@ export const worker = setupWorker(
   getManagedRestaurantMock,
   updateProfileMock,
   getOrdersMock,
-  getOrderDetailsMock
+  getOrderDetailsMock,
+  approveOrderMock,
+  cancelOrderMock,
+  deliverOrderMock,
+  dispatchOrderMock,
 );
 
 export async function enableMSW() {
