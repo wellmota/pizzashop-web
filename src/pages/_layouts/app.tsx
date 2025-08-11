@@ -1,7 +1,7 @@
 import { Header } from '@/components/header';
 import { api } from '@/lib/axios';
 import { isAxiosError } from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/api/get-profile';
@@ -9,18 +9,30 @@ import { getProfile } from '@/api/get-profile';
 export function AppLayout() {
   const navigate = useNavigate();
 
-  // Check if user is authenticated
+  // Check auth cookie on the client first (browser-only)
+  const hasAuthCookie = useMemo(() => {
+    if (typeof document === 'undefined') return false;
+    return /(?:^|;\s*)auth=/.test(document.cookie);
+  }, []);
+
+  // Fetch profile only if we detect the auth cookie
   const { isLoading, isError } = useQuery({
     queryKey: ['profile'],
     queryFn: getProfile,
     retry: false,
+    enabled: hasAuthCookie,
   });
 
   useEffect(() => {
+    if (!hasAuthCookie) {
+      navigate('/auth/signin', { replace: true });
+      return;
+    }
+
     if (isError) {
       navigate('/auth/signin', { replace: true });
     }
-  }, [isError, navigate]);
+  }, [hasAuthCookie, isError, navigate]);
 
   useEffect(() => {
     const interceptorId = api.interceptors.response.use(
