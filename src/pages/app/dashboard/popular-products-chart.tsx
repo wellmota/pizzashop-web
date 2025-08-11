@@ -77,7 +77,7 @@ export function PopularProductsChart() {
                   );
                 }}
               >
-                {popularProducts.map((_, index) => {
+                {(popularProducts || []).map((_, index) => {
                   return (
                     <Cell
                       key={`cel-${index}`}
