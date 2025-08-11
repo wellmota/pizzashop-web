@@ -63,6 +63,10 @@ export function Orders() {
                   <TableHead className="w-[180px]">Order at</TableHead>
                   <TableHead className="w-[140px]">Status</TableHead>
                   <TableHead>Client</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead className="w-[180px]">Phone</TableHead>
+                  <TableHead className="min-w-[220px]">Address</TableHead>
+                  <TableHead className="w-[120px]">Zip code</TableHead>
                   <TableHead className="w-[140px]">Total</TableHead>
                   <TableHead className="w-[164px]"></TableHead>
                   <TableHead className="w-[132px]"></TableHead>

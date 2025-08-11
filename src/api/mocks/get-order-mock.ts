@@ -1,6 +1,5 @@
 import { http, HttpResponse } from 'msw';
 import type { GetOrdersResponse } from '../get-order';
-import { Orders } from '@/pages/app/orders/orders';
 
 type Orders = GetOrdersResponse['orders'];
 
@@ -13,13 +12,86 @@ const statuses: OrderStatus[] = [
   'delivering',
 ];
 
+const sampleCustomers = [
+  {
+    name: 'John Carter',
+    email: 'john.carter@example.com',
+    phone: '+1 (415) 555-0171',
+  },
+  {
+    name: 'Emma Johnson',
+    email: 'emma.johnson@example.com',
+    phone: '+1 (415) 555-0134',
+  },
+  {
+    name: 'Liam Smith',
+    email: 'liam.smith@example.com',
+    phone: '+1 (415) 555-0199',
+  },
+  {
+    name: 'Olivia Brown',
+    email: 'olivia.brown@example.com',
+    phone: '+1 (415) 555-0102',
+  },
+  {
+    name: 'Noah Davis',
+    email: 'noah.davis@example.com',
+    phone: '+1 (415) 555-0147',
+  },
+  {
+    name: 'Ava Wilson',
+    email: 'ava.wilson@example.com',
+    phone: '+1 (415) 555-0183',
+  },
+  {
+    name: 'Sophia Miller',
+    email: 'sophia.miller@example.com',
+    phone: '+1 (415) 555-0162',
+  },
+  {
+    name: 'James Anderson',
+    email: 'james.anderson@example.com',
+    phone: '+1 (415) 555-0125',
+  },
+  {
+    name: 'Mia Thomas',
+    email: 'mia.thomas@example.com',
+    phone: '+1 (415) 555-0158',
+  },
+  {
+    name: 'Lucas Martinez',
+    email: 'lucas.martinez@example.com',
+    phone: '+1 (415) 555-0179',
+  },
+];
+
+const sampleAddresses = [
+  { address: '742 Evergreen Terrace, Springfield', zip: '62704' },
+  { address: '31 Spooner Street, Quahog', zip: '02860' },
+  { address: '124 Conch Street, Bikini Bottom', zip: '91911' },
+  { address: '221B Baker Street, London', zip: 'NW1 6XE' },
+  { address: '4 Privet Drive, Little Whinging', zip: 'CR3 0AA' },
+  { address: '12 Grimmauld Place, London', zip: 'N1 9AL' },
+  { address: '350 Fifth Avenue, New York', zip: '10118' },
+  { address: '1600 Pennsylvania Ave NW, Washington', zip: '20500' },
+  { address: '1 Infinite Loop, Cupertino', zip: '95014' },
+  { address: '4059 Mt Lee Dr, Hollywood', zip: '90068' },
+];
+
 const orders: Orders = Array.from({ length: 60 }).map((_, i) => {
+  const customer = sampleCustomers[i % sampleCustomers.length];
+  const addr = sampleAddresses[i % sampleAddresses.length];
+  const createdAt = new Date(Date.now() - i * 1000 * 60 * 60 * 6);
   return {
-    orderId: `order-${i + 1}`,
-    customerName: `Customer ${i + 1}`,
-    createdAt: new Date(),
-    total: 2400,
-    status: statuses[i % 5],
+    orderId: `ORD-${String(1000 + i)}`,
+    customerName: customer.name,
+    customerEmail: customer.email,
+    customerPhone: customer.phone,
+    customerAddress: addr.address,
+    customerZipCode: addr.zip,
+    createdAt,
+    total: 1500 + (i % 5) * 350,
+    status: statuses[i % statuses.length],
   };
 });
 
@@ -44,7 +116,7 @@ export const getOrdersMock = http.get<never, never, GetOrdersResponse>(
     }
     if (orderId) {
       filteredOrders = filteredOrders.filter((order) =>
-        order.customerName.includes(orderId),
+        order.orderId.includes(orderId),
       );
     }
     if (status) {

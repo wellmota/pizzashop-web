@@ -18,6 +18,9 @@ import { approveOrderMock } from './approve-order-mock';
 import { cancelOrderMock } from './cancel-order-mock';
 import { deliverOrderMock } from './deliver-order-mock';
 import { dispatchOrderMock } from './dispatch-order-mock';
+import { signOutMock } from './sign-out-mock';
+import { getOrdersByStatusMock } from './get-orders-by-status-mock';
+import { getMonthAnniversariesMock } from './get-month-anniversaries-mock';
 
 export const worker = setupWorker(
   signInMock,
@@ -37,6 +40,9 @@ export const worker = setupWorker(
   cancelOrderMock,
   deliverOrderMock,
   dispatchOrderMock,
+  signOutMock,
+  getOrdersByStatusMock,
+  getMonthAnniversariesMock,
 );
 
 export async function enableMSW() {

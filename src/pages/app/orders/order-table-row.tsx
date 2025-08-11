@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog } from '@/components/ui/dialog';
 import { TableRow, TableCell } from '@/components/ui/table';
 import { DialogTrigger } from '@radix-ui/react-dialog';
-import { Search, ArrowRight, X } from 'lucide-react';
+import { Search, ArrowRight, X, Smartphone } from 'lucide-react';
 import { OrderDetails } from './order-details';
 import { OrderStatus } from '@/components/order-status';
 
@@ -21,6 +21,10 @@ export interface OrderTableRowProps {
     createdAt: Date;
     status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered';
     customerName: string;
+    customerEmail: string;
+    customerPhone?: string | null;
+    customerAddress: string;
+    customerZipCode: string;
     total: number;
   };
 }
@@ -28,6 +32,15 @@ export interface OrderTableRowProps {
 export function OrderTableRow({ order }: OrderTableRowProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const queryClient = useQueryClient();
+
+  const whatsappNumber = order.customerPhone
+    ? order.customerPhone.replace(/\D/g, '')
+    : '';
+  const whatsappHref = whatsappNumber
+    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+        `Hello, I am contacting you about order ${order.orderId}.`,
+      )}`
+    : null;
 
   function updateOrderStatusOnCache(orderId: string, status: OrderStatus) {
     const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
@@ -110,6 +123,35 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
         <OrderStatus status={order.status} />
       </TableCell>
       <TableCell className="font-medium">{order.customerName}</TableCell>
+      <TableCell className="text-muted-foreground">
+        {order.customerEmail}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <span className="whitespace-nowrap">
+            {order.customerPhone ?? '—'}
+          </span>
+          {whatsappHref && (
+            <Button
+              asChild
+              variant="success"
+              size="xs"
+              title="Contact on WhatsApp"
+            >
+              <a href={whatsappHref} target="_blank" rel="noreferrer">
+                <Smartphone className="h-3.5 w-3.5" aria-hidden="true" />
+                <span className="sr-only">Open chat</span>
+              </a>
+            </Button>
+          )}
+        </div>
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {order.customerAddress}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {order.customerZipCode}
+      </TableCell>
       <TableCell className="font-medium">
         {(order.total / 100).toLocaleString('en-US', {
           style: 'currency',

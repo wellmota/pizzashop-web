@@ -13,6 +13,10 @@ export interface GetOrdersResponse {
     createdAt: Date;
     status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered';
     customerName: string;
+    customerEmail: string;
+    customerPhone?: string | null;
+    customerAddress: string;
+    customerZipCode: string;
     total: number;
   }[];
   meta: {

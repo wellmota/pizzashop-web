@@ -5,6 +5,10 @@ import { DayOrdersAmountCard } from './day-orders-amount-card';
 import { MonthCanceledOrdersAmount } from './month-canceled-orders-amount';
 import { RevenueChart } from './revenue-chart';
 import { PopularProductsChart } from './popular-products-chart';
+import { AverageTicketCard } from './average-ticket-card';
+import { OrdersByStatusCard } from './orders-by-status-card';
+import { RecentOrders } from './recent-orders';
+import { MonthAnniversaries } from './month-anniversaries';
 
 export function Dashboard() {
   return (
@@ -21,6 +25,12 @@ export function Dashboard() {
         <div className="grid grid-cols-9 gap-4">
           <RevenueChart />
           <PopularProductsChart />
+        </div>
+        <div className="grid grid-cols-12 gap-4">
+          <AverageTicketCard />
+          <OrdersByStatusCard />
+          <RecentOrders />
+          <MonthAnniversaries />
         </div>
       </div>
     </>

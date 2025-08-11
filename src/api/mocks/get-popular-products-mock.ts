@@ -5,12 +5,12 @@ export const getPopularProductsMock = http.get<
   never,
   never,
   GetPopularProductsResponse
->('/metrics/day-orders-amount', () => {
+>('/metrics/popular-products', () => {
   return HttpResponse.json([
-    { product: 'Pizza 1', amount: 5 },
-    { product: 'Pizza 2', amount: 3 },
-    { product: 'Pizza 3', amount: 2 },
-    { product: 'Pizza 4', amount: 1 },
-    { product: 'Pizza 5', amount: 1 },
+    { product: 'Margherita', amount: 32 },
+    { product: 'Pepperoni', amount: 28 },
+    { product: 'Four Cheese', amount: 19 },
+    { product: 'BBQ Chicken', amount: 14 },
+    { product: 'Veggie Supreme', amount: 11 },
   ]);
 });
