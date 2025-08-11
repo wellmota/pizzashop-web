@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "dev:test": "vite --port 50789 --mode test",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
+    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"
