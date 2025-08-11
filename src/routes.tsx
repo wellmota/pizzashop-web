@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AppLayout } from './pages/_layouts/app';
 import { SignIn } from './pages/auth/signin';
 import { AuthLayout } from './pages/_layouts/auth';
@@ -24,6 +24,9 @@ export const router = createBrowserRouter([
       { path: 'signup', element: <SignUp /> },
     ],
   },
+  // Backward compatibility for old links
+  { path: '/signin', element: <Navigate to="/auth/signin" replace /> },
+  { path: '/signup', element: <Navigate to="/auth/signup" replace /> },
   {
     path: '*',
     element: <NotFound />,

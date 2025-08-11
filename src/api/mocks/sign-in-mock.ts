@@ -8,7 +8,8 @@ export const signInMock = http.post<never, SignInBody>('/authenticate', async ({
     return new HttpResponse(null, {
       status: 200,
       headers: {
-        'Set-Cookie': 'auth=sample-jwt',
+        // Ensure cookie is visible to the app on Vercel preview/prod
+        'Set-Cookie': 'auth=sample-jwt; Path=/; HttpOnly; SameSite=Lax',
       },
     });
   }
