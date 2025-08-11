@@ -54,7 +54,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
       queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
         ...cacheData,
-        orders: (cacheData.orders || []).map((order) => {
+        orders: Array.isArray(cacheData.orders) ? cacheData.orders.map((order) => {
           if (order.orderId === orderId) {
             return {
               ...order,
@@ -62,7 +62,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
             };
           }
           return order;
-        }),
+        }) : [],
       });
     });
   }

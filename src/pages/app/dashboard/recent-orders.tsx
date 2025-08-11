@@ -17,7 +17,7 @@ export function RecentOrders() {
     staleTime: 1000 * 30,
   });
 
-  const list = (data?.orders || []).slice(0, 5);
+  const list = Array.isArray(data?.orders) ? data.orders.slice(0, 5) : [];
 
   return (
     <Card className="col-span-3">

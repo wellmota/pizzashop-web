@@ -75,7 +75,7 @@ export function Orders() {
               <TableBody>
                 {isLoadingOrders && <OrderTableSkeleton />}
 
-                {(result?.orders || []).map((order) => {
+                {Array.isArray(result?.orders) && result.orders.map((order) => {
                   return <OrderTableRow key={order.orderId} order={order} />;
                 })}
               </TableBody>

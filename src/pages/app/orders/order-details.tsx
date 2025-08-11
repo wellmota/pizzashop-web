@@ -88,7 +88,7 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {(order?.orderItems || []).map((item) => {
+              {Array.isArray(order?.orderItems) && order.orderItems.map((item) => {
                 return (
                   <TableRow key={item.id}>
                     <TableCell>{item.product.name}</TableCell>

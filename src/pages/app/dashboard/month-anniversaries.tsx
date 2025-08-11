@@ -22,7 +22,7 @@ export function MonthAnniversaries() {
       </CardHeader>
       <CardContent>
         <ul className="space-y-2 text-sm">
-          {(data ?? []).map((item) => (
+          {Array.isArray(data) && data.map((item) => (
             <li
               key={`${item.name}-${item.day}`}
               className="flex items-center justify-between"
