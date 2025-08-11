@@ -18,7 +18,7 @@ export function AppLayout() {
 
   useEffect(() => {
     if (isError) {
-      navigate('/signin', { replace: true });
+      navigate('/auth/signin', { replace: true });
     }
   }, [isError, navigate]);
 
@@ -31,7 +31,7 @@ export function AppLayout() {
           const code = error.response?.data.code;
 
           if (status === 401 && code === 'UNAUTHORIZED') {
-            navigate('/signin', { replace: true });
+            navigate('/auth/signin', { replace: true });
           } else {
             throw error;
           }

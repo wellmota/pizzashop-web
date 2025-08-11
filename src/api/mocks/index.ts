@@ -48,7 +48,7 @@ export const worker = setupWorker(
 export async function enableMSW() {
   // Enable MSW for demo purposes on all environments
   // In a real app, you'd only enable this in development/test
-  
+
   if (typeof window === 'undefined') {
     // Skip MSW on server-side rendering
     return;

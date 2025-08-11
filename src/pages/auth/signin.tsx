@@ -65,7 +65,7 @@ export function SignIn() {
       <Helmet title="Sign in" />
       <div className="p-8">
         <Button variant={'ghost'} asChild className="absolute right-8 top-8">
-          <Link to="/signup">Create New Account</Link>
+          <Link to="/auth/signup">Create New Account</Link>
         </Button>
 
         <div className="flex w-[350px] flex-col justify-center gap-6">

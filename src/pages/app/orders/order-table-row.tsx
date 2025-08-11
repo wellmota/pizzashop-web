@@ -54,7 +54,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
       queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
         ...cacheData,
-        orders: cacheData.orders.map((order) => {
+        orders: (cacheData.orders || []).map((order) => {
           if (order.orderId === orderId) {
             return {
               ...order,
