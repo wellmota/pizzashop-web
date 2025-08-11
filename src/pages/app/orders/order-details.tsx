@@ -73,7 +73,7 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                   Ordered at
                 </TableCell>
                 <TableCell className="flex justify-end">
-                  {formatDistanceToNow(order.createdAt, { addSuffix: true })}
+                  {order.createdAt ? formatDistanceToNow(order.createdAt, { addSuffix: true }) : 'Unknown'}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -88,37 +88,38 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {Array.isArray(order?.orderItems) && order.orderItems.map((item) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell>{item.product.name}</TableCell>
-                    <TableCell className="text-right">
-                      {item.quantity}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(item.priceInCents / 100).toLocaleString('en', {
-                        style: 'currency',
-                        currency: 'USD',
-                      })}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(
-                        (Number(item.priceInCents) * Number(item.quantity)) /
-                        100
-                      ).toLocaleString('en', {
-                        style: 'currency',
-                        currency: 'USD',
-                      })}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {Array.isArray(order?.orderItems) &&
+                order.orderItems.map((item) => {
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.product.name}</TableCell>
+                      <TableCell className="text-right">
+                        {item.quantity}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {(item.priceInCents ? item.priceInCents / 100 : 0).toLocaleString('en', {
+                          style: 'currency',
+                          currency: 'USD',
+                        })}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {(
+                          ((item.priceInCents || 0) * (item.quantity || 0)) /
+                          100
+                        ).toLocaleString('en', {
+                          style: 'currency',
+                          currency: 'USD',
+                        })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
             <TableFooter>
               <TableRow>
                 <TableCell colSpan={3}>Order Total</TableCell>
                 <TableCell className="text-right font-bold">
-                  {(order.totalInCents / 100).toLocaleString('en', {
+                  {(order.totalInCents ? order.totalInCents / 100 : 0).toLocaleString('en', {
                     style: 'currency',
                     currency: 'USD',
                   })}

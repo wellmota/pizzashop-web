@@ -77,15 +77,16 @@ export function PopularProductsChart() {
                   );
                 }}
               >
-                {Array.isArray(popularProducts) && popularProducts.map((_, index) => {
-                  return (
-                    <Cell
-                      key={`cel-${index}`}
-                      fill={COLORS[index]}
-                      className="stroke-background hover:opacity-80"
-                    />
-                  );
-                })}
+                {Array.isArray(popularProducts) &&
+                  popularProducts.map((_, index) => {
+                    return (
+                      <Cell
+                        key={`cel-${index}`}
+                        fill={COLORS[index]}
+                        className="stroke-background hover:opacity-80"
+                      />
+                    );
+                  })}
               </Pie>
             </PieChart>
           </ResponsiveContainer>

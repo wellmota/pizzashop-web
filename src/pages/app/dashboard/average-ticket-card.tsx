@@ -40,7 +40,7 @@ export function AverageTicketCard() {
         ) : (
           <div className="space-y-1">
             <span className="text-2xl font-bold">
-              {average.toLocaleString('en-US', {
+              {(average || 0).toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD',
               })}

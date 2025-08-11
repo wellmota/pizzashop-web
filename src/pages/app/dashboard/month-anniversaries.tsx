@@ -22,26 +22,27 @@ export function MonthAnniversaries() {
       </CardHeader>
       <CardContent>
         <ul className="space-y-2 text-sm">
-          {Array.isArray(data) && data.map((item) => (
-            <li
-              key={`${item.name}-${item.day}`}
-              className="flex items-center justify-between"
-            >
-              <div className="flex items-center gap-2">
-                <span className="font-medium">{item.name}</span>
-                <span className="text-muted-foreground">{`day ${item.day}`}</span>
-              </div>
-              {item.email && (
-                <a
-                  href={`mailto:${item.email}`}
-                  className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:underline"
-                >
-                  <Mail className="h-3.5 w-3.5" />
-                  {item.email}
-                </a>
-              )}
-            </li>
-          ))}
+          {Array.isArray(data) &&
+            data.map((item) => (
+              <li
+                key={`${item.name}-${item.day}`}
+                className="flex items-center justify-between"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">{item.name}</span>
+                  <span className="text-muted-foreground">{`day ${item.day}`}</span>
+                </div>
+                {item.email && (
+                  <a
+                    href={`mailto:${item.email}`}
+                    className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:underline"
+                  >
+                    <Mail className="h-3.5 w-3.5" />
+                    {item.email}
+                  </a>
+                )}
+              </li>
+            ))}
           {!data?.length && <div className="h-[120px]" />}
         </ul>
       </CardContent>

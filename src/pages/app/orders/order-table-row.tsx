@@ -54,15 +54,17 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
       queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
         ...cacheData,
-        orders: Array.isArray(cacheData.orders) ? cacheData.orders.map((order) => {
-          if (order.orderId === orderId) {
-            return {
-              ...order,
-              status,
-            };
-          }
-          return order;
-        }) : [],
+        orders: Array.isArray(cacheData.orders)
+          ? cacheData.orders.map((order) => {
+              if (order.orderId === orderId) {
+                return {
+                  ...order,
+                  status,
+                };
+              }
+              return order;
+            })
+          : [],
       });
     });
   }
@@ -117,7 +119,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
         {order.orderId}
       </TableCell>
       <TableCell className="text-muted-foreground">
-        {formatDistanceToNow(order.createdAt, { addSuffix: true })}
+        {order.createdAt ? formatDistanceToNow(order.createdAt, { addSuffix: true }) : 'Unknown'}
       </TableCell>
       <TableCell>
         <OrderStatus status={order.status} />
@@ -153,7 +155,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
         {order.customerZipCode}
       </TableCell>
       <TableCell className="font-medium">
-        {(order.total / 100).toLocaleString('en-US', {
+        {(order.total ? order.total / 100 : 0).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',
         })}

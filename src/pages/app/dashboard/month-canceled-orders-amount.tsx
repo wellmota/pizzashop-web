@@ -22,7 +22,7 @@ export function MonthCanceledOrdersAmount() {
         {monthCanceledOrdersAmount ? (
           <>
             <span className="text-2xl font-bold tracking-tight">
-              {monthCanceledOrdersAmount.amount.toLocaleString('en')}
+              {(monthCanceledOrdersAmount.amount || 0).toLocaleString('en')}
             </span>
             <p className="text-xs text-muted-foreground">
               {monthCanceledOrdersAmount.diffFromLastMonth <= 0 ? (
