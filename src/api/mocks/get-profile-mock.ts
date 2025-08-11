@@ -8,7 +8,10 @@ export const getProfileMock = http.get<never, never, GetProfileResponse>(
     const isAuthenticated = /(?:^|;\s*)auth=/.test(cookieHeader);
 
     if (!isAuthenticated) {
-      return new HttpResponse(null, { status: 401, statusText: 'UNAUTHORIZED' });
+      return new HttpResponse(null, {
+        status: 401,
+        statusText: 'UNAUTHORIZED',
+      });
     }
 
     return HttpResponse.json({
