@@ -73,7 +73,9 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                   Ordered at
                 </TableCell>
                 <TableCell className="flex justify-end">
-                  {order.createdAt ? formatDistanceToNow(order.createdAt, { addSuffix: true }) : 'Unknown'}
+                  {order.createdAt
+                    ? formatDistanceToNow(order.createdAt, { addSuffix: true })
+                    : 'Unknown'}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -97,7 +99,10 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                         {item.quantity}
                       </TableCell>
                       <TableCell className="text-right">
-                        {(item.priceInCents ? item.priceInCents / 100 : 0).toLocaleString('en', {
+                        {(item.priceInCents
+                          ? item.priceInCents / 100
+                          : 0
+                        ).toLocaleString('en', {
                           style: 'currency',
                           currency: 'USD',
                         })}
@@ -119,7 +124,10 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
               <TableRow>
                 <TableCell colSpan={3}>Order Total</TableCell>
                 <TableCell className="text-right font-bold">
-                  {(order.totalInCents ? order.totalInCents / 100 : 0).toLocaleString('en', {
+                  {(order.totalInCents
+                    ? order.totalInCents / 100
+                    : 0
+                  ).toLocaleString('en', {
                     style: 'currency',
                     currency: 'USD',
                   })}

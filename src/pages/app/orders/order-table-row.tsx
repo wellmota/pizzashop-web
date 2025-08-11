@@ -119,7 +119,9 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
         {order.orderId}
       </TableCell>
       <TableCell className="text-muted-foreground">
-        {order.createdAt ? formatDistanceToNow(order.createdAt, { addSuffix: true }) : 'Unknown'}
+        {order.createdAt
+          ? formatDistanceToNow(order.createdAt, { addSuffix: true })
+          : 'Unknown'}
       </TableCell>
       <TableCell>
         <OrderStatus status={order.status} />

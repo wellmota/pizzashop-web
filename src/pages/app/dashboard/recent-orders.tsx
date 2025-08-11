@@ -39,9 +39,11 @@ export function RecentOrders() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="hidden text-xs text-muted-foreground sm:inline">
-                  {o.createdAt ? formatDistanceToNow(new Date(o.createdAt), {
-                    addSuffix: true,
-                  }) : 'Unknown'}
+                  {o.createdAt
+                    ? formatDistanceToNow(new Date(o.createdAt), {
+                        addSuffix: true,
+                      })
+                    : 'Unknown'}
                 </span>
                 <span className="font-medium">
                   {(o.total ? o.total / 100 : 0).toLocaleString('en-US', {

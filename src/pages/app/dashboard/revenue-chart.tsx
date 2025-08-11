@@ -23,7 +23,7 @@ import { DateRangePicker } from '@/components/ui/date-range-picker';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import { subDays } from 'date-fns';
-import { Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react';
 
 export function RevenueChart() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -33,11 +33,16 @@ export function RevenueChart() {
 
   const { data: dailyRevenueInPeriod } = useQuery({
     queryKey: ['metrics', 'daily-revenue-in-period', dateRange],
-    queryFn: ()=> getDailyRevenueInPeriod({
-      from: dateRange?.from,
-      to: dateRange?.to,
-    })
+    queryFn: () =>
+      getDailyRevenueInPeriod({
+        from: dateRange?.from,
+        to: dateRange?.to,
+      }),
   });
+
+  const chartData = Array.isArray(dailyRevenueInPeriod)
+    ? dailyRevenueInPeriod
+    : [];
 
   return (
     <Card className="col-span-6">
@@ -53,10 +58,10 @@ export function RevenueChart() {
         </div>
       </CardHeader>
       <CardContent>
-        {dailyRevenueInPeriod ? (
+        {Array.isArray(dailyRevenueInPeriod) ? (
           <>
             <ResponsiveContainer width="100%" height={248}>
-              <LineChart data={dailyRevenueInPeriod} style={{ fontSize: 12 }}>
+              <LineChart data={chartData} style={{ fontSize: 12 }}>
                 <CartesianGrid vertical={false} className="stroke-muted" />
                 <XAxis
                   dataKey={'date'}

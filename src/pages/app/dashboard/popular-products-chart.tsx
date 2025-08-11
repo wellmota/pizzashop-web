@@ -21,6 +21,8 @@ export function PopularProductsChart() {
     queryKey: ['metrics', 'popular-products'],
   });
 
+  const items = Array.isArray(popularProducts) ? popularProducts : [];
+
   return (
     <Card className="col-span-3">
       <CardHeader className="pb-8">
@@ -32,11 +34,11 @@ export function PopularProductsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        {popularProducts ? (
+        {Array.isArray(popularProducts) ? (
           <ResponsiveContainer width="100%" height={248}>
             <PieChart style={{ fontSize: 12 }}>
               <Pie
-                data={popularProducts}
+                data={items}
                 dataKey="amount"
                 nameKey="product"
                 cx="50%"
@@ -67,26 +69,23 @@ export function PopularProductsChart() {
                       textAnchor={x > cx ? 'start' : 'end'}
                       dominantBaseline="central"
                     >
-                      {popularProducts[index].product.length > 12
-                        ? popularProducts[index].product
-                            .substring(0, 12)
-                            .concat('...')
-                        : popularProducts[index].product}{' '}
+                      {items[index].product.length > 12
+                        ? items[index].product.substring(0, 12).concat('...')
+                        : items[index].product}{' '}
                       ({value})
                     </text>
                   );
                 }}
               >
-                {Array.isArray(popularProducts) &&
-                  popularProducts.map((_, index) => {
-                    return (
-                      <Cell
-                        key={`cel-${index}`}
-                        fill={COLORS[index]}
-                        className="stroke-background hover:opacity-80"
-                      />
-                    );
-                  })}
+                {items.map((_, index) => {
+                  return (
+                    <Cell
+                      key={`cel-${index}`}
+                      fill={COLORS[index]}
+                      className="stroke-background hover:opacity-80"
+                    />
+                  );
+                })}
               </Pie>
             </PieChart>
           </ResponsiveContainer>
