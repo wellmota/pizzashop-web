@@ -46,9 +46,9 @@ export const worker = setupWorker(
 );
 
 export async function enableMSW() {
-  if (env.MODE !== 'test') {
-    return;
-  }
-
-  await worker.start();
+  // Enable MSW for demo purposes on all environments
+  // In a real app, you'd only enable this in development/test
+  await worker.start({
+    onUnhandledRequest: 'bypass',
+  });
 }
