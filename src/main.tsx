@@ -4,10 +4,17 @@ import './index.css';
 import { App } from './App';
 import { enableMSW } from './api/mocks';
 
-enableMSW().then(() => {
-  createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  );
-});
+enableMSW()
+  .then(() => {
+    console.log('MSW setup completed');
+  })
+  .catch((error) => {
+    console.warn('MSW setup failed, continuing without mocks:', error);
+  })
+  .finally(() => {
+    createRoot(document.getElementById('root')!).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    );
+  });

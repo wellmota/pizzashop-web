@@ -48,7 +48,21 @@ export const worker = setupWorker(
 export async function enableMSW() {
   // Enable MSW for demo purposes on all environments
   // In a real app, you'd only enable this in development/test
-  await worker.start({
-    onUnhandledRequest: 'bypass',
-  });
+  
+  if (typeof window === 'undefined') {
+    // Skip MSW on server-side rendering
+    return;
+  }
+
+  try {
+    await worker.start({
+      onUnhandledRequest: 'bypass',
+      serviceWorker: {
+        url: '/mockServiceWorker.js',
+      },
+    });
+    console.log('🔥 MSW enabled for demo');
+  } catch (error) {
+    console.warn('Failed to start MSW:', error);
+  }
 }
