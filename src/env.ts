@@ -2,7 +2,9 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   MODE: z.enum(['production', 'development', 'test']),
-  VITE_API_URL: z.string().default('/api'),
+  // Base API URL. For the demo we default to '/', so MSW can intercept
+  // requests (e.g., '/authenticate', '/me') in production too.
+  VITE_API_URL: z.string().default('/'),
   VITE_ENABLE_API_DELAY: z
     .string()
     .optional()
